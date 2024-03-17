@@ -42,4 +42,3 @@ python3 console.py
 
 	update <class name> <id> <attribute name> "<attribute value>"
 	all   or   all <class name>
-    ```
