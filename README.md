@@ -47,4 +47,4 @@ python3 console.py
 
 ## Authors ✒️
 
-- Mohamed Elyes Arfa `<Elyesarfa>`
+- Mohamed Elyes Arfa `<Elyesarfa7211@gmail.com>`
