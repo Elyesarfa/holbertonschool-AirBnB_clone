@@ -17,6 +17,8 @@ There are 2 ways to start the command interpreter:
 
 ```bash
 ./console.py
+```
+```bash
 python3 console.py
 ```
 
@@ -29,9 +31,15 @@ python3 console.py
 - update: Update attributes of an object.
 - all: List all objects of a certain type.
 
-### Syntaxes:
-- create <class name>
-- show <class name> <id>
-- destroy <class name> <id>
-- update <class name> <id> <attribute name> "<attribute value>"
-- all or all <class name>
+## syntaxes:
+
+```bash
+	create <class name> 
+
+	show <class name> <id>
+
+	destroy <class name> <id>
+
+	update <class name> <id> <attribute name> "<attribute value>"
+	all   or   all <class name>
+    ```
