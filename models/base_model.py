@@ -9,6 +9,16 @@ class BaseModel:
         self.id = str(uuid.uuid4())
         self.created_at = datetime.now()
         self.updated_at = datetime.now()
+        if (kwargs is not None):
+            format = "%Y-%m-%dT%H:%M:%S.%f"
+            try:
+                self.id = kwargs["id"]
+                x = datetime.strptime(kwargs["created_at"], format)
+                y = datetime.strptime(kwargs["updated_at"], format)
+                self.created_at = x
+                self.updated_at = y
+            except KeyError:
+                pass
 
     def __str__(self):
         return "[{}] ({}) {}".format(self.__class__.__name__, self.id, self.__dict__)
