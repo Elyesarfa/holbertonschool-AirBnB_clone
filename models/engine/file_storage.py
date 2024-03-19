@@ -6,7 +6,6 @@ import os
 
 
 class FileStorage:
-    """Handles serialization and deserialization of objects to and from JSON files"""
 
     def __init__(self):
         """Initialize FileStorage"""
@@ -35,8 +34,7 @@ class FileStorage:
         if os.path.isfile(self.__file_path):
             with open(self.__file_path, 'r', encoding='utf-8') as file:
                 data = json.load(file)
-                for key, obj_dict in data.items():
-                    class_name = key.split('.')[0]
-                    module = __import__('models.' + class_name, fromlist=[class_name])
-                    cls = getattr(module, class_name)
-                    self.__objects[key] = cls(**obj_dict)
+                for key, value in data.items():
+                    theclassname, theid = key.split(".")
+                    classname = eval(theclassname)
+                    self.__objects[key] = classname(**value)

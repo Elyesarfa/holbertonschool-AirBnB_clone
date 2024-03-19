@@ -37,5 +37,6 @@ class TestCases(unittest.TestCase):
         string = string + f"({test1.id}) {test1.__dict__}"
         self.assertEqual(test1.__str__(), string)
 
+
 if __name__ == '__main__':
     unittest.main()
