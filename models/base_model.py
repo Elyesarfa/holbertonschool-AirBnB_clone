@@ -5,6 +5,7 @@ import uuid
 from datetime import datetime
 from models import storage
 
+
 class BaseModel:
     def __init__(self, **kwargs):
         self.id = str(uuid.uuid4())
@@ -23,7 +24,7 @@ class BaseModel:
             storage.new(self)
 
     def __str__(self):
-        return "[{}] ({}) {}".format(self.__class__.__name__, self.id, self.__dict__)
+        return str(f"[{self.__class__.__name__}] ({self.id}) {self.__dict__}")
 
     def save(self):
         self.updated_at = datetime.now()
