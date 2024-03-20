@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-"""testing cases ( basemodel )"""
+"""testing cases for basemodel"""
 
 from models.base_model import BaseModel
 from models import storage
@@ -20,7 +20,7 @@ class TestCases(unittest.TestCase):
         self.assertTrue(os.path.exists(models.storage._FileStorage__file_path))
 
     def test_case_dict(self):
-        """testing __dict__"""
+        """testing dict"""
         test1 = BaseModel()
         x = test1.__class__.__name__
         dictionary = test1.__dict__.copy()
@@ -31,7 +31,7 @@ class TestCases(unittest.TestCase):
         self.assertAlmostEqual(test_dictionary["__class__"], x)
 
     def test_case_str(self):
-        """testing __str__"""
+        """testing str"""
         test1 = BaseModel()
         string = str(f"[{test1.__class__.__name__}] ")
         string = string + f"({test1.id}) {test1.__dict__}"
