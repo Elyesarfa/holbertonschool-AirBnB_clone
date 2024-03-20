@@ -1,7 +1,9 @@
 #!/usr/bin/python3
+"""base class for console"""
 
 import uuid
 from datetime import datetime
+from models import storage
 
 class BaseModel:
     def __init__(self, **kwargs):
@@ -24,7 +26,6 @@ class BaseModel:
 
     def save(self):
         self.updated_at = datetime.now()
-        from models import storage
         storage.save()
 
     def to_dict(self):
