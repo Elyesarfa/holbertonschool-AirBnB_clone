@@ -5,6 +5,7 @@ import json
 import os
 
 
+
 class FileStorage:
 
     def __init__(self):
@@ -28,13 +29,6 @@ class FileStorage:
             serialized_objs[key] = obj.to_dict()
         with open(self.__file_path, 'w', encoding='utf-8') as file:
             json.dump(serialized_objs, file)
-
-    def classes(self):
-        """Returns a dictionary of valid classes and their references."""
-        from models.base_model import BaseModel
-
-        classes = {"BaseModel": BaseModel}
-        return classes
 
     def reload(self):
         """Deserializes the JSON file to __objects"""

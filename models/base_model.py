@@ -21,6 +21,7 @@ class BaseModel:
                 self.updated_at = y
             except KeyError:
                 pass
+            storage.new(self)
 
     def __str__(self):
         return str(f"[{self.__class__.__name__}] ({self.id}) {self.__dict__}")
