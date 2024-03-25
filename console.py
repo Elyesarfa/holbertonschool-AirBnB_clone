@@ -36,6 +36,29 @@ class HBNBCommand(cmd.Cmd):
             print("** class doesn't exist **")
             storage.save()
 
+    def do_show(self, arg):
+        """
+        Prints the string representation of an instance based on the class name and id.
+        """
+        args = arg.split()
+        if len(args) == 0:
+            print("** class name missing **")
+            return
+        try:
+            cls = eval(args[0])
+        except NameError:
+            print("** class doesn't exist **")
+            return
+        if len(args) < 2:
+            print("** instance id missing **")
+            return
+        key = "{}.{}".format(args[0], args[1])
+        objs = storage.all()
+        if key not in objs:
+            print("** no instance found **")
+        else:
+            print(objs[key])
+
 
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
