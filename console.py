@@ -1,6 +1,9 @@
 #!/usr/bin/env python3
 """Console module for the HBNB project"""
 import cmd
+import sys
+from models.base_model import BaseModel
+from models import storage
 
 
 class HBNBCommand(cmd.Cmd):
@@ -19,6 +22,19 @@ class HBNBCommand(cmd.Cmd):
     def emptyline(self):
         """Do nothing on empty line"""
         pass
+
+    def do_create(self, arg):
+        """Creates a new instance of BaseModel"""
+        if not arg:
+            print("** class name missing **")
+            return
+        try:
+            new_instance = eval(arg)()
+            new_instance.save()
+            print(new_instance.id)
+        except NameError:
+            print("** class doesn't exist **")
+            storage.save()
 
 
 if __name__ == '__main__':
