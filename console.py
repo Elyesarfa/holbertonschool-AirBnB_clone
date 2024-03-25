@@ -1,5 +1,7 @@
 #!/usr/bin/env python3
-"""Console module for the HBNB project"""
+"""
+Console module for the HBNB project
+"""
 import cmd
 import sys
 from models.base_model import BaseModel
@@ -34,10 +36,9 @@ class HBNBCommand(cmd.Cmd):
             print(new_instance.id)
         except NameError:
             print("** class doesn't exist **")
-            storage.save()
 
     def do_show(self, arg):
-        """Prints the string representation of an instance based on the class name and id."""
+        """Prints the string representation."""
         args = arg.split()
         if len(args) == 0:
             print("** class name missing **")
@@ -60,21 +61,27 @@ class HBNBCommand(cmd.Cmd):
     def do_destroy(self, arg):
         """Deletes an instance based on the class name and id."""
         args = arg.split()
-        objdict = storage.all()
         if len(args) == 0:
             print("** class name missing **")
-        elif args[0] not in storage.classes.keys():
+            return
+        try:
+            cls = eval(args[0])
+        except NameError:
             print("** class doesn't exist **")
-        elif len(args) == 1:
+            return
+        if len(args) < 2:
             print("** instance id missing **")
-        elif "{}.{}".format(args[0], args[1]) not in objdict.keys():
+            return
+        key = "{}.{}".format(args[0], args[1])
+        objs = storage.all()
+        if key not in objs:
             print("** no instance found **")
         else:
-            del objdict["{}.{}".format(args[0], args[1])]
+            del objs[key]
             storage.save()
 
     def do_all(self, arg):
-        """Prints all string representation of all instances based or not on the class name."""
+        """Prints all string representation of all instances."""
         objs = storage.all()
         if not arg:
             print([str(objs[key]) for key in objs])
@@ -85,6 +92,35 @@ class HBNBCommand(cmd.Cmd):
             print("** class doesn't exist **")
             return
         print([str(objs[key]) for key in objs if key.startswith(arg + ".")])
+
+    def do_update(self, arg):
+        """
+        Updates an instance."""
+        args = arg.split()
+        if len(args) == 0:
+            print("** class name missing **")
+            return
+        try:
+            cls = eval(args[0])
+        except NameError:
+            print("** class doesn't exist **")
+            return
+        if len(args) < 2:
+            print("** instance id missing **")
+            return
+        key = "{}.{}".format(args[0], args[1])
+        objs = storage.all()
+        if key not in objs:
+            print("** no instance found **")
+            return
+        if len(args) < 3:
+            print("** attribute name missing **")
+            return
+        if len(args) < 4:
+            print("** value missing **")
+            return
+        setattr(objs[key], args[2], eval(args[3]))
+        objs[key].save()
 
 
 if __name__ == '__main__':
