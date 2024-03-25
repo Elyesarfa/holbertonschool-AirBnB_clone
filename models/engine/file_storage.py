@@ -29,10 +29,18 @@ class FileStorage:
         with open(self.__file_path, 'w', encoding='utf-8') as file:
             json.dump(serialized_objs, file)
 
+    def classes(self):
+        """Returns a dictionary of valid classes and their references."""
+        from models.base_model import BaseModel
+        from models.user import User
+
+        classes = {"BaseModel": BaseModel,
+                   "User": User
+                   }
+        return classes
+
     def reload(self):
         """Deserializes the JSON file to __objects"""
-        from models.base_model import BaseModel
-
         if os.path.isfile(self.__file_path):
             with open(self.__file_path, 'r', encoding='utf-8') as file:
                 data = json.load(file)
