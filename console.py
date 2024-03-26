@@ -5,6 +5,7 @@ Console module for the HBNB project
 import cmd
 import sys
 from models.base_model import BaseModel
+from models.user import User
 from models import storage
 
 
@@ -26,7 +27,7 @@ class HBNBCommand(cmd.Cmd):
         pass
 
     def do_create(self, arg):
-        """Creates a new instance of BaseModel"""
+        """Creates a new instance of BaseModel or User"""
         if not arg:
             print("** class name missing **")
             return
@@ -60,25 +61,25 @@ class HBNBCommand(cmd.Cmd):
 
     def do_destroy(self, arg):
         """Deletes an instance based on the class name and id."""
-        args = arg.split()
-        if len(args) == 0:
-            print("** class name missing **")
-            return
-        try:
-            cls = eval(args[0])
-        except NameError:
-            print("** class doesn't exist **")
-            return
-        if len(args) < 2:
-            print("** instance id missing **")
-            return
-        key = "{}.{}".format(args[0], args[1])
-        objs = storage.all()
-        if key not in objs:
+    args = arg.split()
+    if len(args) == 0:
+        print("** class name missing **")
+    try:
+        cls = eval(args[0])
+    except NameError:
+        print("** class doesn't exist **")
+    if len(args) < 2:
+        print("** instance id missing **")
+    key = "{}.{}".format(args[0], args[1])
+    objs = storage.all()
+    if key not in objs:
+        if args[0] == "User":
             print("** no instance found **")
         else:
-            del objs[key]
-            storage.save()
+            print("** no instance found **")
+    else:
+        del objs[key]
+        storage.save()   
 
     def do_all(self, arg):
         """Prints all string representation of all instances."""
@@ -94,8 +95,7 @@ class HBNBCommand(cmd.Cmd):
         print([str(objs[key]) for key in objs if key.startswith(arg + ".")])
 
     def do_update(self, arg):
-        """
-        Updates an instance."""
+        """Updates an instance."""
         args = arg.split()
         if len(args) == 0:
             print("** class name missing **")
