@@ -9,6 +9,9 @@ from models.user import User
 from models import storage
 
 
+classnames = ["BaseModel", "User"]
+
+
 class HBNBCommand(cmd.Cmd):
     """HBNBCommand class - command interpreter"""
     prompt = '(hbnb) '
@@ -79,6 +82,13 @@ class HBNBCommand(cmd.Cmd):
             print("** no instance found **")
         else:
             del objs[key]
+            storage.save()
+            if args[0] == "User":
+                objdict = storage.all(User)
+        if args[1] not in objdict.keys():
+            print("** no instance found **")
+        else:
+            del objdict[args[1]]
             storage.save()
 
     def do_all(self, arg):
