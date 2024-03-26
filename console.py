@@ -91,6 +91,22 @@ class HBNBCommand(cmd.Cmd):
             del objdict[args[1]]
             storage.save()
 
+        if args[0] == "User":
+            objdict = storage.all()
+        user_instances = [obj for obj in objdict.values() if isinstance(obj, User)]
+        instance_exists = False
+        for user_instance in user_instances:
+            if user_instance.id == args[1]:
+                instance_exists = True
+                break
+
+        if not instance_exists:
+            print("** no instance found **")
+            return
+
+        del objdict[key]
+        storage.save()
+
     def do_all(self, arg):
         """Prints all string representation of all instances."""
         objs = storage.all()
