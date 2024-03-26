@@ -1,20 +1,15 @@
 #!/usr/bin/env python3
-"""
-Console module for the HBNB project
-"""
+"""Console module for the HBNB project"""
 import cmd
-import sys
 from models.base_model import BaseModel
 from models.user import User
 from models import storage
 
-
-classnames = ["BaseModel", "User"]
-
-
+user = User()
 class HBNBCommand(cmd.Cmd):
     """HBNBCommand class - command interpreter"""
     prompt = '(hbnb) '
+    classnames = ["BaseModel", "User"]
 
     def do_quit(self, arg):
         """Quit command to exit the program"""
