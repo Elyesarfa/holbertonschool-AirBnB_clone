@@ -5,6 +5,7 @@ import uuid
 from datetime import datetime
 from models import storage
 
+
 class BaseModel:
     def __init__(self, **kwargs):
         self.id = str(uuid.uuid4())
