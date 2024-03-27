@@ -20,6 +20,7 @@ class TestFileStorage(unittest.TestCase):
 
     def test_file_path_exists(self):
         """Test if file path exists"""
+        testobj = FileStorage()
         self.assertTrue(os.path.isfile(self.testobj._FileStorage__file_path))
 
 if __name__ == '__main__':
