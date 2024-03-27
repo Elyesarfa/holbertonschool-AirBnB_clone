@@ -1,13 +1,26 @@
 #!/usr/bin/python3
-"""testing cases ( file storage )"""
+"""Testing cases for FileStorage"""
 
 import unittest
 import os
 from models.engine.file_storage import FileStorage
 
 class TestFileStorage(unittest.TestCase):
-    """Set up test environment before each test case"""
-def testcase1(self):
-		testobj = FileStorage()
-		testobj.__file_path
-		self.assertTrue(os.path.isfile(testobj))
+    """Test cases for FileStorage"""
+
+    def setUp(self):
+        """Set up test environment before each test case"""
+        self.testobj = FileStorage()
+
+    def tearDown(self):
+        """Clean up test environment after each test case"""
+        del self.testobj
+        if os.path.exists("file.json"):
+            os.remove("file.json")
+
+    def test_file_path_exists(self):
+        """Test if file path exists"""
+        self.assertTrue(os.path.isfile(self.testobj._FileStorage__file_path))
+
+if __name__ == '__main__':
+    unittest.main()
